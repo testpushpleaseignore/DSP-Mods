@@ -167,13 +167,23 @@ namespace PowerNetworkManager.UI {
                 GUILayout.Label($"<b>{LDB.items.Select(accProtoID).name} ({status}) --  Max {status} Power: {PowerData.convertPowerToString(maxPower)};  Current Power: {PowerData.convertPowerToString(Math.Abs(data.curPower))}</b>", UITheme.TextAlignStyle);
                 GUILayout.EndHorizontal();
             }
-			#endregion
+            #endregion
 
-			#region Consumers
-            //TODO
-			#endregion
+            #region Consumers
+            GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
+            GUILayout.Label($"<b>Consumers</b>", UITheme.TextAlignStyle);
+            GUILayout.EndHorizontal();
 
-			GUILayout.EndScrollView();
+            foreach (int consProtoID in PowerData.curConsPerType.Keys) {
+                PowerConsData data = PowerData.curConsPerType[consProtoID];
+
+                GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
+                GUILayout.Label($"<b>    {LDB.items.Select(consProtoID).name} --  max power: {PowerData.convertPowerToString(data.maxPower)};  current power: {PowerData.convertPowerToString(data.currPower)};  minimum (idle) power: {PowerData.convertPowerToString(data.idlePower)}</b>", UITheme.TextAlignStyle);
+                GUILayout.EndHorizontal();
+            }
+            #endregion
+
+            GUILayout.EndScrollView();
             GUILayout.EndVertical();
 			#endregion
 

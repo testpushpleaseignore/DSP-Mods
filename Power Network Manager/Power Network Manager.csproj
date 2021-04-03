@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PowerAccData.cs" />
+    <Compile Include="PowerConsData.cs" />
     <Compile Include="PowerExcData.cs" />
     <Compile Include="PowerGenData.cs" />
     <Compile Include="PowerData.cs" />

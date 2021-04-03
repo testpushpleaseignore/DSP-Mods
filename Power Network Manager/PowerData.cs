@@ -35,6 +35,8 @@ namespace PowerNetworkManager.UI {
         public static Dictionary<int, PowerAccData> curAccPerType = new Dictionary<int, PowerAccData>();
 
         //Consumer stats
+        public static long consumerMaxPower;
+        public static Dictionary<int, PowerConsData> curConsPerType = new Dictionary<int, PowerConsData>();
         #endregion
 
         public void onGameData_GameTick(long time, GameData __instance) {
@@ -125,39 +127,22 @@ namespace PowerNetworkManager.UI {
                 curAccPerType[accProtoID].maxChgPower += accumulator.inputEnergyPerTick * GameMain.tickPerSecI;
                 curAccPerType[accProtoID].curPower += accumulator.curPower * GameMain.tickPerSecI;
             }
-			#endregion
+            #endregion
 
-			#region consumers
+            #region consumers
+            curConsPerType.Clear();
+            foreach (int cons in powerNetwork.consumers) {
+                PowerConsumerComponent consumer = powerSystem.consumerPool[cons];
+                int consProtoID = factory.entityPool[consumer.entityId].protoId;
 
-			#endregion
-
-			//logger.LogDebug($"Power Node ID: {selectedPowerNodeID};  Network ID: {selectedPowerNetworkID};  Num Nodes in Network: {selectedPowerNetwork.nodes.Count}");
-
-			/*
-            logger.LogDebug($"  Consumer Count: {selectedPowerNetwork.consumers.Count};  Consumer Ratio: {selectedPowerNetwork.consumerRatio * 100.0}%;  Generator Ratio: {selectedPowerNetwork.generaterRatio * 100.0}%;" +
-                $"  Generator Capacity: {selectedPowerNetwork.energyCapacity * GameMain.tickPerSecI}; Consumption demand: {selectedPowerNetwork.energyRequired * GameMain.tickPerSecI};" +
-                $"  Current Generation: {selectedPowerNetwork.energyServed * GameMain.tickPerSecI};  Accumulator Charging: {Math.Abs(selectedPowerNetwork.energyAccumulated + selectedPowerNetwork.energyExchanged) * GameMain.tickPerSecI};" +
-                $"  Energy accumulated: {selectedPowerNetwork.energyStored}");
-            */
-
-			/*
-            foreach (int consumerID in selectedPowerNetwork.consumers) {
-                PowerConsumerComponent consumer = powerSystem.consumerPool[consumerID];
-                EntityData consumerData = factory.entityPool[consumer.entityId];
-                string entityType = "";
-
-                if (consumerData.stationId != 0) {
-                    StationComponent stationComponent = factory.transport.stationPool[consumerData.stationId];
-                    entityType = stationComponent.name;
-                }
-
-                
-                logger.LogDebug($"    Consumer ID: {consumerID};  consumer name: {entityType};  idle power: {consumer.idleEnergyPerTick * GameMain.tickPerSecI};  max work power: {consumer.workEnergyPerTick * GameMain.tickPerSecI};" +
-                    $"  current power draw: {consumer.requiredEnergy * GameMain.tickPerSecI};  required energy: {consumer.requiredEnergy};  served energy: {consumer.servedEnergy};  power ratio: {consumer.powerRatio}");
+                if (!curConsPerType.ContainsKey(consProtoID))
+                    curConsPerType.Add(consProtoID, new PowerConsData());
+                curConsPerType[consProtoID].idlePower += consumer.idleEnergyPerTick * GameMain.tickPerSecI;
+                curConsPerType[consProtoID].maxPower += consumer.workEnergyPerTick * GameMain.tickPerSecI;
+                curConsPerType[consProtoID].currPower += consumer.requiredEnergy * GameMain.tickPerSecI;
             }
-            */
-
-		}
+            #endregion
+        }
 
 		public bool IsDifferentGame() {
             if (DSPGame.GameDesc != lastGameDesc) {

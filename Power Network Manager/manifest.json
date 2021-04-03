@@ -1,0 +1,9 @@
+{
+    "name": "Power Network Manager",
+    "version_number": "0.0.1",
+    "website_url": "https://github.com/testpushpleaseignore/DSP-Mods",
+    "description": "View power usage for a selected network",
+    "dependencies": [
+        "xiaoye97-BepInEx-5.4.5"
+    ]
+}

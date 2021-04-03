@@ -8,8 +8,7 @@ using PowerNetworkManager.UI;
 
 namespace PowerNetworkManager {
 
-	[BepInDependency("me.xiaoye97.plugin.Dyson.LDBTool", BepInDependency.DependencyFlags.HardDependency)]
-    [BepInPlugin(pluginGuid, pluginName, pluginVersion)]
+	[BepInPlugin(pluginGuid, pluginName, pluginVersion)]
     [BepInProcess("DSPGame.exe")]
     public class PowerNetworkManager : BaseUnityPlugin {
         public const string pluginGuid = "testpostpleaseignore.dsp.powernetworkmanager";
@@ -59,16 +58,12 @@ namespace PowerNetworkManager {
         public static void GameMain_Begin_Prefix() {
             ignoreFirstReverseButtonOnPointerEnter = true;
 
-            logger.LogDebug("GameMain_Begin_Prefix start");
-
             if (GameMain.instance != null) {
                 if (GameObject.Find("Game Menu/button-1-bg")) {
                     if (!GameObject.Find("pnm-launch-button")) {
                         RectTransform prefab = GameObject.Find("Game Menu/button-1-bg").GetComponent<RectTransform>();
                         launchButton = GameObject.Instantiate<RectTransform>(prefab);
                         launchButton.gameObject.name = "pnm-launch-button";
-
-                        logger.LogDebug("launchButton name: " + launchButton.gameObject.name);
 
                         UIButton uiButton = launchButton.GetComponent<UIButton>();
                         uiButton.tips.tipTitle = "Power Network Manager";
