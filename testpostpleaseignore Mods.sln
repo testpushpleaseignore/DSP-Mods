@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBeltFix", "SuperBeltFix\SuperBeltFix.csproj", "{79372AC0-6DBE-48A5-B7BB-1A625725A9F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power Network Manager", "Power Network Manager\Power Network Manager.csproj", "{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79372AC0-6DBE-48A5-B7BB-1A625725A9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79372AC0-6DBE-48A5-B7BB-1A625725A9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79372AC0-6DBE-48A5-B7BB-1A625725A9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79372AC0-6DBE-48A5-B7BB-1A625725A9F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4FCF731-00C2-4800-992C-A7F518838648}
+	EndGlobalSection
+EndGlobal
