@@ -30,7 +30,7 @@ namespace PowerNetworkManager.UI {
 
         public PowerWindow(PowerDataCalc powerData) {
             this.powerData = powerData;
-		}
+        }
 
         public void OnGUI() {
             var uiGame = BGMController.instance.uiGame;
@@ -103,10 +103,10 @@ namespace PowerNetworkManager.UI {
                 FixedSizeAdjust = Mathf.Max(FixedSizeAdjustOriginal - 0.5f, FixedSizeAdjust - 0.1f);
             }
             GUILayout.EndArea();
-			#endregion
+            #endregion
 
-			#region main window area
-			GUILayout.BeginVertical();
+            #region main window area
+			GUILayout.BeginVertical(UITheme.layoutBackgroundColor);
             sv = GUILayout.BeginScrollView(sv, UnityEngine.GUI.skin.box);
 
 			#region summary rows
