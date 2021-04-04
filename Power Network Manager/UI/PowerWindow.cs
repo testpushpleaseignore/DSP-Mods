@@ -147,7 +147,7 @@ namespace PowerNetworkManager.UI {
             }
 
             foreach (int excProtoID in PowerDataCalc.curChargingExchangersPerType.Keys) {
-                PowerExcData data = PowerDataCalc.curDischExchangersPerType[excProtoID];
+                PowerExcData data = PowerDataCalc.curChargingExchangersPerType[excProtoID];
 
                 GUILayout.Label($"{LDB.items.Select(excProtoID).name} (Charging)");
 
