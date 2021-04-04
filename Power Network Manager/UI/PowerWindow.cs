@@ -125,7 +125,9 @@ namespace PowerNetworkManager.UI {
             GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
             GUILayout.Label($"<b>Consumer ratio: {Math.Round(PowerDataCalc.consumerRatio,3)};  Generator ratio: {Math.Round(PowerDataCalc.generatorRatio, 3)}</b>", UITheme.TextAlignStyle);
             GUILayout.EndHorizontal();
-			#endregion
+            #endregion
+
+            GUILayout.Space(20);
 
 			#region Exchangers
 			GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
@@ -160,6 +162,8 @@ namespace PowerNetworkManager.UI {
             GUILayout.EndVertical();
             #endregion
 
+            GUILayout.Space(20);
+
             #region Generators
             GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
             GUILayout.Label($"<b>Generators</b>", UITheme.TextAlignStyle);
@@ -185,6 +189,8 @@ namespace PowerNetworkManager.UI {
             GUILayout.EndVertical();
             #endregion
 
+            GUILayout.Space(20);
+
             #region Accumulators
             GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
             GUILayout.Label($"<b>Accumulators</b>", UITheme.TextAlignStyle);
@@ -208,6 +214,8 @@ namespace PowerNetworkManager.UI {
 
             GUILayout.EndVertical();
             #endregion
+
+            GUILayout.Space(20);
 
             #region Consumers
             GUILayout.BeginVertical(UnityEngine.GUI.skin.box);

@@ -78,17 +78,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelperMethods.cs" />
-    <Compile Include="PowerAccData.cs" />
-    <Compile Include="PowerConsData.cs" />
-    <Compile Include="PowerData.cs" />
-    <Compile Include="PowerExcData.cs" />
-    <Compile Include="PowerGenData.cs" />
-    <Compile Include="PowerDataCalc.cs" />
-    <Compile Include="UITheme.cs" />
-    <Compile Include="PowerWindow.cs" />
+    <Compile Include="Data\HelperMethods.cs" />
+    <Compile Include="Data\PowerAccData.cs" />
+    <Compile Include="Data\PowerConsData.cs" />
+    <Compile Include="Data\PowerData.cs" />
+    <Compile Include="Data\PowerExcData.cs" />
+    <Compile Include="Data\PowerGenData.cs" />
+    <Compile Include="Data\PowerDataCalc.cs" />
+    <Compile Include="UI\UITheme.cs" />
+    <Compile Include="UI\PowerWindow.cs" />
     <Compile Include="PowerNetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
