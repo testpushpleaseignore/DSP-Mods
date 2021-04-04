@@ -6,6 +6,9 @@ Click on any Power Node (e.g. Tesla Tower, Wireless power tower, Satellite subst
 
 ## Changelog
 
+### v0.0.3
+- Fix error introduced in V0.0.2
+
 ### v0.0.2
 - Improve layout of information
 - Small performance improvements
