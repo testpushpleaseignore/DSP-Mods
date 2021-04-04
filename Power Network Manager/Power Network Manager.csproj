@@ -78,11 +78,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperMethods.cs" />
     <Compile Include="PowerAccData.cs" />
     <Compile Include="PowerConsData.cs" />
+    <Compile Include="PowerData.cs" />
     <Compile Include="PowerExcData.cs" />
     <Compile Include="PowerGenData.cs" />
-    <Compile Include="PowerData.cs" />
+    <Compile Include="PowerDataCalc.cs" />
     <Compile Include="UITheme.cs" />
     <Compile Include="PowerWindow.cs" />
     <Compile Include="PowerNetworkManager.cs" />

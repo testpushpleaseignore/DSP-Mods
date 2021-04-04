@@ -1,15 +1,15 @@
 ﻿using System;
 using UnityEngine;
+using PowerNetworkManager.Data;
 
 namespace PowerNetworkManager.UI {
 	public class PowerWindow {
 
         private const string WindowName = "Network Power Info";
 
-        public PowerData powerData;
+        public PowerDataCalc powerData;
 
         public static bool HighlightButton = false;
-        //public static bool ShowButton = true;
         public static bool Show = false;
         private static Rect winRect = new Rect(0, 0, 1015, 650);
 
@@ -26,7 +26,9 @@ namespace PowerNetworkManager.UI {
 
         private static bool isInit = false;
 
-        public PowerWindow(PowerData powerData) {
+        public const int valueBoxWidth = 300;
+
+        public PowerWindow(PowerDataCalc powerData) {
             this.powerData = powerData;
 		}
 
@@ -109,78 +111,129 @@ namespace PowerNetworkManager.UI {
 
 			#region summary rows
 			GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-            GUILayout.Label($"<b>Max Power Usage for Network: {PowerData.convertPowerToString(PowerData.maxNetworkPowerUsage)}</b>", UITheme.TextAlignStyle);
+            GUILayout.Label($"<b>Max Power Usage for Network: {PowerDataCalc.maxNetworkPowerUsageString}</b>", UITheme.TextAlignStyle);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-            GUILayout.Label($"<b>Max Power Usage for Network (sans transport stations): {PowerData.convertPowerToString(PowerData.maxNetworkPowerUsageSansTransports)}</b>", UITheme.TextAlignStyle);
+            GUILayout.Label($"<b>Max Power Usage for Network (sans transport stations): {PowerDataCalc.maxNetworkPowerUsageSansTransportsString}</b>", UITheme.TextAlignStyle);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-            GUILayout.Label($"<b>Consumption Demand: {PowerData.convertPowerToString(PowerData.powerDemand)}</b>", UITheme.TextAlignStyle);
+            GUILayout.Label($"<b>Consumption Demand: {PowerDataCalc.powerDemandString}</b>", UITheme.TextAlignStyle);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-            GUILayout.Label($"<b>Consumer ratio: {Math.Round(PowerData.consumerRatio,3)};  Generator ratio: {Math.Round(PowerData.generatorRatio, 3)}</b>", UITheme.TextAlignStyle);
+            GUILayout.Label($"<b>Consumer ratio: {Math.Round(PowerDataCalc.consumerRatio,3)};  Generator ratio: {Math.Round(PowerDataCalc.generatorRatio, 3)}</b>", UITheme.TextAlignStyle);
             GUILayout.EndHorizontal();
 			#endregion
 
 			#region Exchangers
-			GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-            GUILayout.Label($"<b>Exchangers: {PowerData.convertPowerToString(PowerData.exchangerMaxPower)}</b>", UITheme.TextAlignStyle);
-            GUILayout.EndHorizontal();
+			GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+            GUILayout.Label($"<b>Exchangers</b>", UITheme.TextAlignStyle);
 
-            foreach (int excProtoID in PowerData.curDischExchangersPerType.Keys) {
-                GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-                GUILayout.Label($"<b>    {LDB.items.Select(excProtoID).name} (Discharging) -- max power: {PowerData.convertPowerToString(PowerData.curDischExchangersPerType[excProtoID].maxPower)} ;  cur power: {PowerData.convertPowerToString(PowerData.curDischExchangersPerType[excProtoID].curPower)}</b>", UITheme.TextAlignStyle);
+            GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+
+            foreach (int excProtoID in PowerDataCalc.curDischExchangersPerType.Keys) {
+                PowerExcData data = PowerDataCalc.curDischExchangersPerType[excProtoID];
+
+                GUILayout.Label($"{LDB.items.Select(excProtoID).name} (Discharging)");
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Current Power: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
                 GUILayout.EndHorizontal();
             }
 
-            foreach (int excProtoID in PowerData.curChargingExchangersPerType.Keys) {
-                GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-                GUILayout.Label($"<b>    {LDB.items.Select(excProtoID).name} (Charging) -- max power: {PowerData.convertPowerToString(PowerData.curChargingExchangersPerType[excProtoID].maxPower)} ;  cur power: {PowerData.convertPowerToString(PowerData.curChargingExchangersPerType[excProtoID].curPower)}</b>", UITheme.TextAlignStyle);
+            foreach (int excProtoID in PowerDataCalc.curChargingExchangersPerType.Keys) {
+                PowerExcData data = PowerDataCalc.curDischExchangersPerType[excProtoID];
+
+                GUILayout.Label($"{LDB.items.Select(excProtoID).name} (Charging)");
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Current Power: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
                 GUILayout.EndHorizontal();
             }
+
+            GUILayout.EndVertical();
+
+            GUILayout.EndVertical();
             #endregion
 
             #region Generators
-            GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-            GUILayout.Label($"<b>Generation capacity: {PowerData.convertPowerToString(PowerData.generatorOutputCapacity)} ({PowerData.generatorCount})</b>", UITheme.TextAlignStyle);
-            GUILayout.EndHorizontal();
+            GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+            GUILayout.Label($"<b>Generators</b>", UITheme.TextAlignStyle);
 
-            foreach(int genProtoID in PowerData.curGenerationData.Keys) {
-                PowerGenData data = PowerData.curGenerationData[genProtoID];
+            foreach(int genProtoID in PowerDataCalc.curGenerationData.Keys) {
+                PowerGenData data = PowerDataCalc.curGenerationData[genProtoID];
 
-                GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-                GUILayout.Label($"<b>    {LDB.items.Select(genProtoID).name} --  max power: {PowerData.convertPowerToString(data.maxPower)};  genPower: {PowerData.convertPowerToString(data.genPower)};  used: {PowerData.convertPowerToString(data.curPower)}</b>", UITheme.TextAlignStyle);
+                GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+
+                GUILayout.Label($"{LDB.items.Select(genProtoID).name}");
+
+                GUILayout.BeginHorizontal();
+
+                GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Current Power: {data.genPowerString}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Power Being Used: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
+
                 GUILayout.EndHorizontal();
+
+                GUILayout.EndVertical();
             }
+
+            GUILayout.EndVertical();
             #endregion
 
             #region Accumulators
-            foreach (int accProtoID in PowerData.curAccPerType.Keys) {
-                PowerAccData data = PowerData.curAccPerType[accProtoID];
-                string status = data.curPower < 0 ? "Discharging" : data.curPower > 0 ? "Charging" : "Full";
-                long maxPower = data.curPower < 0 ? data.maxDiscPower : data.curPower > 0 ? data.maxChgPower : data.maxDiscPower;
+            GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+            GUILayout.Label($"<b>Accumulators</b>", UITheme.TextAlignStyle);
 
-                GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-                GUILayout.Label($"<b>{LDB.items.Select(accProtoID).name} ({status}) --  Max {status} Power: {PowerData.convertPowerToString(maxPower)};  Current Power: {PowerData.convertPowerToString(Math.Abs(data.curPower))}</b>", UITheme.TextAlignStyle);
+            GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+
+            foreach (int accProtoID in PowerDataCalc.curAccPerType.Keys) {
+                PowerAccData data = PowerDataCalc.curAccPerType[accProtoID];
+                string status = data.curPower < 0 ? "Discharging" : data.curPower > 0 ? "Charging" : PowerDataCalc.currentAccumulatedEnergy == 0 ? "Empty" : "Full";
+                string maxPower = data.curPower < 0 ? data.maxDiscPowerString : data.curPower > 0 ? data.maxChgPowerString : data.maxDiscPowerString;
+
+                GUILayout.Label($"{LDB.items.Select(accProtoID).name} ({status})");
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Box($"Max Power: {maxPower}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Current Power: {Math.Abs(data.curPower)}", GUILayout.Width(valueBoxWidth));
                 GUILayout.EndHorizontal();
             }
+
+            GUILayout.EndVertical();
+
+            GUILayout.EndVertical();
             #endregion
 
             #region Consumers
-            GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
+            GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
             GUILayout.Label($"<b>Consumers</b>", UITheme.TextAlignStyle);
-            GUILayout.EndHorizontal();
 
-            foreach (int consProtoID in PowerData.curConsPerType.Keys) {
-                PowerConsData data = PowerData.curConsPerType[consProtoID];
+            
 
-                GUILayout.BeginHorizontal(UnityEngine.GUI.skin.box);
-                GUILayout.Label($"<b>    {LDB.items.Select(consProtoID).name} --  max power: {PowerData.convertPowerToString(data.maxPower)};  current power: {PowerData.convertPowerToString(data.currPower)};  minimum (idle) power: {PowerData.convertPowerToString(data.idlePower)}</b>", UITheme.TextAlignStyle);
+            foreach (int consProtoID in PowerDataCalc.curConsPerType.Keys) {
+                PowerConsData data = PowerDataCalc.curConsPerType[consProtoID];
+
+                GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+
+                GUILayout.Label($"{LDB.items.Select(consProtoID).name}");
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Current Power: {data.currPowerString}", GUILayout.Width(valueBoxWidth));
+                GUILayout.Box($"Minimum (Idle) Power: {data.idlePowerString}", GUILayout.Width(valueBoxWidth));
                 GUILayout.EndHorizontal();
+
+                GUILayout.EndVertical();
             }
+
+            
+
+            GUILayout.EndVertical();
             #endregion
 
             GUILayout.EndScrollView();

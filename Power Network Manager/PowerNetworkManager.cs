@@ -5,6 +5,7 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 using PowerNetworkManager.UI;
+using PowerNetworkManager.Data;
 
 namespace PowerNetworkManager {
 
@@ -16,7 +17,7 @@ namespace PowerNetworkManager {
         public const string pluginVersion = "0.0.1";
 
         public static PowerNetworkManager instance;
-        public static PowerData powerData = new PowerData();
+        public static PowerDataCalc powerData = new PowerDataCalc();
 
         internal static ManualLogSource logger;
         new internal static BepInEx.Configuration.ConfigFile Config;
@@ -140,7 +141,7 @@ namespace PowerNetworkManager {
             int selectedPowerNodeID = powerWindow.nodeId;
             PowerNodeComponent selectedPowerNode = powerSystem.nodePool[selectedPowerNodeID];
 
-            PowerData.currentPowerNetworkID = selectedPowerNode.networkId;
+            PowerDataCalc.currentPowerNetworkID = selectedPowerNode.networkId;
             PowerWindow.Show = true;
         }
 

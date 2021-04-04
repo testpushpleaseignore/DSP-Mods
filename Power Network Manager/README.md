@@ -6,6 +6,10 @@ Click on any Power Node (e.g. Tesla Tower, Wireless power tower, Satellite subst
 
 ## Changelog
 
+### v0.0.2
+- Improve layout of information
+- Small performance improvements
+
 ### v0.0.1
 - Initial Release
 - _I am still working out how I want this mod to ultimately look like, so for now these earlier releases are more of a proof of concept_
