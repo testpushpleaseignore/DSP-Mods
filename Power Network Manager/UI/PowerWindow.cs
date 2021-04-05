@@ -137,9 +137,13 @@ namespace PowerNetworkManager.UI {
 			GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
 
 			foreach (int excProtoID in PowerDataCalc.curDischExchangersPerType.Keys) {
+				ItemProto item = LDB.items.Select(excProtoID);
 				PowerExcData data = PowerDataCalc.curDischExchangersPerType[excProtoID];
 
-				GUILayout.Label($"{LDB.items.Select(excProtoID).name} (Discharging)");
+				GUILayout.BeginHorizontal();
+				GUILayout.Box(item.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
+				GUILayout.Label($"{item.name} (Discharging)");
+				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
@@ -148,9 +152,13 @@ namespace PowerNetworkManager.UI {
 			}
 
 			foreach (int excProtoID in PowerDataCalc.curChargingExchangersPerType.Keys) {
+				ItemProto item = LDB.items.Select(excProtoID);
 				PowerExcData data = PowerDataCalc.curChargingExchangersPerType[excProtoID];
 
-				GUILayout.Label($"{LDB.items.Select(excProtoID).name} (Charging)");
+				GUILayout.BeginHorizontal();
+				GUILayout.Box(item.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
+				GUILayout.Label($"{item.name} (Charging)");
+				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
@@ -177,7 +185,10 @@ namespace PowerNetworkManager.UI {
 
 					GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
 
+					GUILayout.BeginHorizontal();
+					GUILayout.Box(item.Value.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
 					GUILayout.Label($"{item.Key}");
+					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();
 
@@ -204,11 +215,15 @@ namespace PowerNetworkManager.UI {
 			GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
 
 			foreach (int accProtoID in PowerDataCalc.curAccPerType.Keys) {
+				ItemProto item = LDB.items.Select(accProtoID);
 				PowerAccData data = PowerDataCalc.curAccPerType[accProtoID];
 				string status = data.curPower < 0 ? "Discharging" : data.curPower > 0 ? "Charging" : PowerDataCalc.currentAccumulatedEnergy == 0 ? "Empty" : "Full";
 				string maxPower = data.curPower < 0 ? data.maxDiscPowerString : data.curPower > 0 ? data.maxChgPowerString : data.maxDiscPowerString;
 
-				GUILayout.Label($"{LDB.items.Select(accProtoID).name} ({status})");
+				GUILayout.BeginHorizontal();
+				GUILayout.Box(item.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
+				GUILayout.Label($"{item.name} ({status})");
+				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box($"Max Power: {maxPower}", GUILayout.Width(valueBoxWidth));
@@ -235,7 +250,10 @@ namespace PowerNetworkManager.UI {
 
 					GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
 
+					GUILayout.BeginHorizontal();
+					GUILayout.Box(item.Value.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
 					GUILayout.Label($"{item.Key}");
+					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();
 					GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));

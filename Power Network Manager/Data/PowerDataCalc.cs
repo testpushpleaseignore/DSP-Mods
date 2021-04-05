@@ -56,9 +56,11 @@ namespace PowerNetworkManager.Data {
 		}
 
 		public void onGameData_GameTick(long time, GameData __instance) {
-			if (IsDifferentGame()) {
+			if (IsDifferentGame())
 				Reset();
-			}
+
+			if (__instance == null || __instance.localPlanet == null)
+				return;
 
 			if (time - lastTime < (GameMain.tickPerSecI * refreshRateSec))
 				return;

@@ -8,6 +8,7 @@ Click on any Power Node (e.g. Tesla Tower, Wireless power tower, Satellite subst
 
 ### v0.0.4
 - List items now sorted
+- Added item icons to each row of info
 
 ### v0.0.3
 - Fix error introduced in v0.0.2
