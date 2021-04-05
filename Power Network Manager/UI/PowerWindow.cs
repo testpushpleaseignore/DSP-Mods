@@ -50,14 +50,6 @@ namespace PowerNetworkManager.UI {
 				isInit = true;
 			}
 
-			AutoResize(DSPGame.globalOption.uiLayoutHeight, applyCustomScale: false);
-
-			/*
-			if (ShowButton && shouldShowByGameState) {
-				DrawMenuButton();
-			}
-			*/
-
 			AutoResize(UILayoutHeight);
 
 			if (Show) {
