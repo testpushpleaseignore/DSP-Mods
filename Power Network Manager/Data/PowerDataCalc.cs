@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PowerNetworkStructures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -176,6 +177,20 @@ namespace PowerNetworkManager.Data {
 				curConsPerType[consProtoID].idlePower += consumer.idleEnergyPerTick * GameMain.tickPerSecI;
 				curConsPerType[consProtoID].maxPower += consumer.workEnergyPerTick * GameMain.tickPerSecI;
 				curConsPerType[consProtoID].currPower += consumer.requiredEnergy * GameMain.tickPerSecI;
+			}
+
+			foreach (Node node in powerNetwork.nodes) {
+				int nodeID = node.id;
+				PowerNodeComponent nodeC = powerSystem.nodePool[nodeID];
+				int nodeProtoID = factory.entityPool[nodeC.entityId].protoId;
+
+				if (nodeC.id == nodeID && nodeC.isCharger) {
+					if (!curConsPerType.ContainsKey(nodeProtoID))
+						curConsPerType.Add(nodeProtoID, new PowerConsData());
+					curConsPerType[nodeProtoID].idlePower += nodeC.idleEnergyPerTick * GameMain.tickPerSecI;
+					curConsPerType[nodeProtoID].maxPower += nodeC.workEnergyPerTick * GameMain.tickPerSecI;
+					curConsPerType[nodeProtoID].currPower += nodeC.requiredEnergy * GameMain.tickPerSecI;
+				}
 			}
 
 			foreach (PowerConsData val in curConsPerType.Values)
