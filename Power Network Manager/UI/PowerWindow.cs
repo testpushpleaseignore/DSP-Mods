@@ -219,7 +219,7 @@ namespace PowerNetworkManager.UI {
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box($"Max Power: {maxPower}", GUILayout.Width(valueBoxWidth));
-				GUILayout.Box($"Current Power: {Math.Abs(data.curPower)}", GUILayout.Width(valueBoxWidth));
+				GUILayout.Box($"Current Power: {data.curPowerAbsString}", GUILayout.Width(valueBoxWidth));
 				GUILayout.EndHorizontal();
 			}
 

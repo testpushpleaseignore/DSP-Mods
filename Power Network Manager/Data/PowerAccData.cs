@@ -8,11 +8,14 @@
 
 		public long curPower;
 		public string curPowerString;
+		public long curPowerAbs;
+		public string curPowerAbsString;
 
 		public override void generateStrings() {
 			maxDiscPowerString = HelperMethods.convertPowerToString(maxDiscPower);
 			maxChgPowerString = HelperMethods.convertPowerToString(maxChgPower);
 			curPowerString = HelperMethods.convertPowerToString(curPower);
+			curPowerAbsString = HelperMethods.convertPowerToString(curPowerAbs);
 		}
 	}
 }

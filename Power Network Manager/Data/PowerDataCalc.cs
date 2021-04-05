@@ -157,6 +157,7 @@ namespace PowerNetworkManager.Data {
 				curAccPerType[accProtoID].maxDiscPower += accumulator.outputEnergyPerTick * GameMain.tickPerSecI;
 				curAccPerType[accProtoID].maxChgPower += accumulator.inputEnergyPerTick * GameMain.tickPerSecI;
 				curAccPerType[accProtoID].curPower += accumulator.curPower * GameMain.tickPerSecI;
+				curAccPerType[accProtoID].curPowerAbs += Math.Abs(accumulator.curPower * GameMain.tickPerSecI);
 				currentAccumulatedEnergy += accumulator.curEnergy;
 			}
 
