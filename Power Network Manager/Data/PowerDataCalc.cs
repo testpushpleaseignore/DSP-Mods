@@ -7,6 +7,8 @@ namespace PowerNetworkManager.Data {
         static long lastTime = 0;
         const long refreshRateSec = 2;
 
+        public const int sigFigs = 3;
+
         public GameDesc lastGameDesc = null;
 
         //lists of game assets in specific sort orders
