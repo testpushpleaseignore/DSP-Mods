@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using PowerNetworkManager.Data;
 
@@ -168,22 +169,27 @@ namespace PowerNetworkManager.UI {
             GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
             GUILayout.Label($"<b>Generators</b>", UITheme.TextAlignStyle);
 
-            foreach(int genProtoID in PowerDataCalc.curGenerationData.Keys) {
-                PowerGenData data = PowerDataCalc.curGenerationData[genProtoID];
+            foreach (KeyValuePair<string, ItemProto> item in PowerDataCalc.protosInAlphaOrder) {
+                int genProtoID = item.Value.ID;
 
-                GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+                if(PowerDataCalc.curGenerationData.ContainsKey(genProtoID)) {
+                    PowerGenData data = PowerDataCalc.curGenerationData[genProtoID];
 
-                GUILayout.Label($"{LDB.items.Select(genProtoID).name}");
+                    GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
 
-                GUILayout.BeginHorizontal();
+                    GUILayout.Label($"{item.Key}");
 
-                GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
-                GUILayout.Box($"Current Power: {data.genPowerString}", GUILayout.Width(valueBoxWidth));
-                GUILayout.Box($"Power Being Used: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
+                    GUILayout.BeginHorizontal();
 
-                GUILayout.EndHorizontal();
+                    GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+                    GUILayout.Box($"Current Power: {data.genPowerString}", GUILayout.Width(valueBoxWidth));
+                    GUILayout.Box($"Power Being Used: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
 
-                GUILayout.EndVertical();
+                    GUILayout.EndHorizontal();
+
+                    GUILayout.EndVertical();
+                }
+
             }
 
             GUILayout.EndVertical();
@@ -221,25 +227,26 @@ namespace PowerNetworkManager.UI {
             GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
             GUILayout.Label($"<b>Consumers</b>", UITheme.TextAlignStyle);
 
-            
+            foreach (KeyValuePair<string, ItemProto> item in PowerDataCalc.protosInAlphaOrder) {
+                int consProtoID = item.Value.ID;
 
-            foreach (int consProtoID in PowerDataCalc.curConsPerType.Keys) {
-                PowerConsData data = PowerDataCalc.curConsPerType[consProtoID];
+                if (PowerDataCalc.curConsPerType.ContainsKey(consProtoID)) {
+                    PowerConsData data = PowerDataCalc.curConsPerType[consProtoID];
 
-                GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
+                    GUILayout.BeginVertical(UnityEngine.GUI.skin.box);
 
-                GUILayout.Label($"{LDB.items.Select(consProtoID).name}");
+                    GUILayout.Label($"{item.Key}");
 
-                GUILayout.BeginHorizontal();
-                GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
-                GUILayout.Box($"Current Power: {data.currPowerString}", GUILayout.Width(valueBoxWidth));
-                GUILayout.Box($"Minimum (Idle) Power: {data.idlePowerString}", GUILayout.Width(valueBoxWidth));
-                GUILayout.EndHorizontal();
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+                    GUILayout.Box($"Current Power: {data.currPowerString}", GUILayout.Width(valueBoxWidth));
+                    GUILayout.Box($"Minimum (Idle) Power: {data.idlePowerString}", GUILayout.Width(valueBoxWidth));
+                    GUILayout.EndHorizontal();
 
-                GUILayout.EndVertical();
+                    GUILayout.EndVertical();
+                }
+
             }
-
-            
 
             GUILayout.EndVertical();
             #endregion

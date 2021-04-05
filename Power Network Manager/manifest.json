@@ -1,6 +1,6 @@
 {
     "name": "Power_Network_Manager",
-    "version_number": "0.0.3",
+    "version_number": "0.0.4",
     "website_url": "https://github.com/testpushpleaseignore/DSP-Mods",
     "description": "View power usage for a selected network",
     "dependencies": [

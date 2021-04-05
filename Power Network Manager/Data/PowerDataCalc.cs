@@ -9,6 +9,9 @@ namespace PowerNetworkManager.Data {
 
         public GameDesc lastGameDesc = null;
 
+        //lists of game assets in specific sort orders
+        public static SortedList<string, ItemProto> protosInAlphaOrder;
+
         //power info members
         public static int currentPowerNetworkID = 1;
 
@@ -42,6 +45,13 @@ namespace PowerNetworkManager.Data {
         public static long consumerMaxPower;
         public static Dictionary<int, PowerConsData> curConsPerType = new Dictionary<int, PowerConsData>();
         #endregion
+
+        public static void Init() {
+            protosInAlphaOrder = new SortedList<string, ItemProto>();
+            foreach (ItemProto item in LDB.items.dataArray) {
+                protosInAlphaOrder.Add(item.name, item);
+			}
+        }
 
         public void onGameData_GameTick(long time, GameData __instance) {
             if (IsDifferentGame()) {
@@ -179,7 +189,5 @@ namespace PowerNetworkManager.Data {
         public void Reset() {
             lastTime = 0;
         }
-    }
-
-
+	}
 }

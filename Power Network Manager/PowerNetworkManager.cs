@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PowerNetworkManager.UI;
 using PowerNetworkManager.Data;
+using System;
 
 namespace PowerNetworkManager {
 
@@ -14,7 +15,9 @@ namespace PowerNetworkManager {
     public class PowerNetworkManager : BaseUnityPlugin {
         public const string pluginGuid = "testpostpleaseignore.dsp.powernetworkmanager";
         public const string pluginName = "Power_Network_Manager";
-        public const string pluginVersion = "0.0.3";
+        public const string pluginVersion = "0.0.4";
+
+        private Harmony harmony;
 
         public static PowerNetworkManager instance;
         public static PowerDataCalc powerData = new PowerDataCalc();
@@ -28,18 +31,28 @@ namespace PowerNetworkManager {
 
         public static PowerWindow powerWindow;
 
-        public void Awake() {
+        private void Awake() {
             logger = base.Logger;
             Config = base.Config;
 
+            Assert.Null(instance, $"An instance of {nameof(PowerNetworkManager)} has already been created!");
             instance = this;
+
+            PowerDataCalc.Init();
 
             powerWindow = new PowerWindow(powerData);
 
-            //Harmony.CreateAndPatchAll(typeof(PowerNetworkManager));
-            Harmony.CreateAndPatchAll(typeof(PowerNetworkManager));
+            harmony = new Harmony(pluginGuid);
+
+            try { harmony.PatchAll(typeof(PowerNetworkManager)); }
+            catch (Exception e) { Logger.LogError($"Harmony patching failed: {e.Message}"); }
 
             logger.LogInfo("Load Complete");
+        }
+
+        private void OnDestroy() {
+            harmony.UnpatchSelf();
+            instance = null;
         }
 
         // The first call happens for some reason after every game load.
