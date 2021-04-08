@@ -34,8 +34,8 @@ namespace PowerNetworkManager.UI {
 		}
 
 		public void OnGUI() {
-			var uiGame = BGMController.instance.uiGame;
-			var shouldShowByGameState = DSPGame.GameDesc != null && uiGame != null && uiGame.gameData != null && uiGame.guideComplete && DSPGame.IsMenuDemo == false && DSPGame.Game.running
+			UIGame uiGame = BGMController.instance.uiGame;
+			bool shouldShowByGameState = DSPGame.GameDesc != null && uiGame != null && uiGame.gameData != null && uiGame.guideComplete && DSPGame.IsMenuDemo == false && DSPGame.Game.running
 				&& (UIGame.viewMode == EViewMode.Normal || UIGame.viewMode == EViewMode.Sail)
 				&& !(uiGame.techTree.active || uiGame.dysonmap.active || uiGame.starmap.active || uiGame.escMenu.active || uiGame.hideAllUI0 || uiGame.hideAllUI1)
 				&& uiGame.gameMenu.active;
