@@ -27,7 +27,7 @@ namespace PowerNetworkManager {
 
 		static bool ignoreFirstReverseButtonOnPointerEnter = true;
 		public static RectTransform launchButton;
-		public static Sprite reverseSprite;
+		public static Sprite launchSprite;
 
 		public static PowerWindow powerWindow;
 
@@ -51,6 +51,11 @@ namespace PowerNetworkManager {
 		}
 
 		private void OnDestroy() {
+			if (launchButton != null) {
+				Destroy(launchButton);
+				Destroy(launchSprite);
+			}
+
 			harmony.UnpatchSelf();
 			instance = null;
 		}

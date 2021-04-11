@@ -134,7 +134,7 @@ namespace PowerNetworkManager.UI {
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box(item.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
-				GUILayout.Label($"{item.name} (Discharging)");
+				GUILayout.Label($"{item.name.Translate()} (Discharging)");
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
@@ -149,7 +149,7 @@ namespace PowerNetworkManager.UI {
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box(item.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
-				GUILayout.Label($"{item.name} (Charging)");
+				GUILayout.Label($"{item.name.Translate()} (Charging)");
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
@@ -179,7 +179,7 @@ namespace PowerNetworkManager.UI {
 
 					GUILayout.BeginHorizontal();
 					GUILayout.Box(item.Value.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
-					GUILayout.Label($"{item.Key}");
+					GUILayout.Label($"{item.Key.Translate()}");
 					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();
@@ -214,7 +214,7 @@ namespace PowerNetworkManager.UI {
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Box(item.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
-				GUILayout.Label($"{item.name} ({status})");
+				GUILayout.Label($"{item.name.Translate()} ({status})");
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
@@ -244,7 +244,7 @@ namespace PowerNetworkManager.UI {
 
 					GUILayout.BeginHorizontal();
 					GUILayout.Box(item.Value.iconSprite.texture, UITheme.VeinIconLayoutSmallOptions);
-					GUILayout.Label($"{item.Key}");
+					GUILayout.Label($"{item.Key.Translate()}");
 					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();
