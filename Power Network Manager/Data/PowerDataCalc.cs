@@ -83,10 +83,6 @@ namespace PowerNetworkManager.Data {
 			consumerRatio = powerNetwork.consumerRatio;
 			generatorRatio = powerNetwork.generaterRatio;
 			powerDemand = powerNetwork.energyRequired * GameMain.tickPerSecI;
-
-			maxNetworkPowerUsageString = HelperMethods.convertPowerToString(maxNetworkPowerUsage);
-			maxNetworkPowerUsageSansTransportsString = HelperMethods.convertPowerToString(maxNetworkPowerUsageSansTransports);
-			powerDemandString = HelperMethods.convertPowerToString(powerDemand);
 			#endregion
 
 			#region exchangers
@@ -105,15 +101,24 @@ namespace PowerNetworkManager.Data {
 				if (exchanger.state <= -1f) {
 					if (!curDischExchangersPerType.ContainsKey(excProtoID))
 						curDischExchangersPerType.Add(excProtoID, new PowerExcData());
-					curDischExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
-					curDischExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+
 					curDischExchangersPerType[excProtoID].ratedPower += exchanger.energyPerTick * GameMain.tickPerSecI;
+
+					curDischExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
+
+					curDischExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
 				} else if (exchanger.state >= 1f) {
 					if (!curChargingExchangersPerType.ContainsKey(excProtoID))
 						curChargingExchangersPerType.Add(excProtoID, new PowerExcData());
-					curChargingExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
-					curChargingExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+
 					curChargingExchangersPerType[excProtoID].ratedPower += exchanger.energyPerTick * GameMain.tickPerSecI;
+					maxNetworkPowerUsage += exchanger.energyPerTick * GameMain.tickPerSecI;
+					maxNetworkPowerUsageSansTransports += exchanger.energyPerTick * GameMain.tickPerSecI;
+
+					curChargingExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
+
+					curChargingExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+					powerDemand += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
 				}
 			}
 
@@ -136,8 +141,10 @@ namespace PowerNetworkManager.Data {
 				if (!(genProtoID == 2208 && generator.productId != 0)) {
 					if (!curGenerationData.ContainsKey(genProtoID))
 						curGenerationData.Add(genProtoID, new PowerGenData());
-					curGenerationData[genProtoID].maxPower += generator.capacityCurrentTick * GameMain.tickPerSecI;
-					long genPower = (long)Math.Round(generator.genEnergyPerTick * (double)generator.currentStrength) * GameMain.tickPerSecI;
+
+					curGenerationData[genProtoID].maxPower += generator.gamma ? maxGammaPower(generator) : (generator.capacityCurrentTick * GameMain.tickPerSecI);
+
+					long genPower = (generator.gamma ? generator.MaxOutputCurrent_Gamma() : (long)Math.Round(generator.genEnergyPerTick * (double)generator.currentStrength)) * GameMain.tickPerSecI;
 					curGenerationData[genProtoID].genPower += genPower;
 					curGenerationData[genProtoID].curPower += powerDemand > exchangerMaxPower ? (long) Math.Round(genPower * powerNetwork.generaterRatio) : 0L;
 				}
@@ -198,6 +205,10 @@ namespace PowerNetworkManager.Data {
 			foreach (PowerConsData val in curConsPerType.Values)
 				val.generateStrings();
 			#endregion
+
+			maxNetworkPowerUsageString = HelperMethods.convertPowerToString(maxNetworkPowerUsage);
+			maxNetworkPowerUsageSansTransportsString = HelperMethods.convertPowerToString(maxNetworkPowerUsageSansTransports);
+			powerDemandString = HelperMethods.convertPowerToString(powerDemand);
 		}
 
 		public bool IsDifferentGame() {
@@ -210,6 +221,17 @@ namespace PowerNetworkManager.Data {
 
 		public void Reset() {
 			lastTime = 0;
+		}
+
+		public long maxGammaPower(PowerGeneratorComponent receiver) {
+			if (!receiver.gamma)
+				return -1;
+
+			long maxPower = receiver.genEnergyPerTick * GameMain.tickPerSecI;
+			maxPower = (long) (maxPower * 2.5f); //a ray receiver at 100% continuous power produces 2.5 times more power than at 0% (which is what genEnergyPerTick is assuming)
+			maxPower *= ((receiver.catalystPoint <= 0) ? 1l : 2l); //For ray receivers, this is greater than 0 if there is a graviton lens in it. So ray receivers with graviton lenses run at double power
+			maxPower *= ((receiver.productId <= 0) ? 1l : 5l); //if productId is greater than 0, then it's producing something (e.g. critical photons), and therefore run at 5x power
+			return maxPower;
 		}
 	}
 }
