@@ -52,7 +52,7 @@ namespace PowerNetworkManager.Data {
 		public static void Init() {
 			protosInAlphaOrder = new SortedList<string, ItemProto>();
 			foreach (ItemProto item in LDB.items.dataArray) {
-				protosInAlphaOrder.Add(item.name, item);
+				protosInAlphaOrder.Add(item.name.Translate(), item);
 			}
 		}
 
