@@ -138,7 +138,8 @@ namespace PowerNetworkManager.UI {
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+				GUILayout.Box($"Max Rated Power: {data.ratedPowerString}", GUILayout.Width(valueBoxWidth));
+				GUILayout.Box($"Max Active Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
 				GUILayout.Box($"Current Power: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
 				GUILayout.EndHorizontal();
 			}
@@ -153,7 +154,8 @@ namespace PowerNetworkManager.UI {
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Box($"Max Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
+				GUILayout.Box($"Max Rated Power: {data.ratedPowerString}", GUILayout.Width(valueBoxWidth));
+				GUILayout.Box($"Max Active Power: {data.maxPowerString}", GUILayout.Width(valueBoxWidth));
 				GUILayout.Box($"Current Power: {data.curPowerString}", GUILayout.Width(valueBoxWidth));
 				GUILayout.EndHorizontal();
 			}

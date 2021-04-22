@@ -52,7 +52,7 @@ namespace PowerNetworkManager {
 
 		private void OnDestroy() {
 			if (launchButton != null) {
-				Destroy(launchButton);
+				Destroy(launchButton.gameObject);
 				Destroy(launchSprite);
 			}
 

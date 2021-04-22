@@ -107,11 +107,13 @@ namespace PowerNetworkManager.Data {
 						curDischExchangersPerType.Add(excProtoID, new PowerExcData());
 					curDischExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
 					curDischExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+					curDischExchangersPerType[excProtoID].ratedPower += exchanger.energyPerTick * GameMain.tickPerSecI;
 				} else if (exchanger.state >= 1f) {
 					if (!curChargingExchangersPerType.ContainsKey(excProtoID))
 						curChargingExchangersPerType.Add(excProtoID, new PowerExcData());
 					curChargingExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
 					curChargingExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+					curChargingExchangersPerType[excProtoID].ratedPower += exchanger.energyPerTick * GameMain.tickPerSecI;
 				}
 			}
 
