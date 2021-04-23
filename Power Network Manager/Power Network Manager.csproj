@@ -90,5 +90,11 @@
     <Compile Include="PowerNetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "C:\Users\elnin\AppData\Roaming\r2modmanPlus-local\DysonSphereProgram\profiles\Default\BepInEx\scripts\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -9,7 +9,7 @@ Click on any Power Node (e.g. Tesla Tower, Wireless power tower, Satellite subst
 ### v0.0.4
 - List items now sorted
 - Added item icons to each row of info
-- various fixes in power calculations
+- Various fixes in power calculations
 
 ### v0.0.3
 - Fix error introduced in v0.0.2

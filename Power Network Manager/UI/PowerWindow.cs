@@ -46,6 +46,7 @@ namespace PowerNetworkManager.UI {
 
 			if (!isInit && GameMain.isRunning) {
 				UITheme.Init();
+				PowerDataCalc.Init();
 				//InitSources();
 				isInit = true;
 			}

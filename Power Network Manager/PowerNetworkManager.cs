@@ -38,8 +38,6 @@ namespace PowerNetworkManager {
 			Assert.Null(instance, $"An instance of {nameof(PowerNetworkManager)} has already been created!");
 			instance = this;
 
-			PowerDataCalc.Init();
-
 			powerWindow = new PowerWindow(powerData);
 
 			harmony = new Harmony(pluginGuid);
