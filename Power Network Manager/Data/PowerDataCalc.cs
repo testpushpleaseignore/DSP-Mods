@@ -104,9 +104,9 @@ namespace PowerNetworkManager.Data {
 
 					curDischExchangersPerType[excProtoID].ratedPower += exchanger.energyPerTick * GameMain.tickPerSecI;
 
-					curDischExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
+					curDischExchangersPerType[excProtoID].maxPower += exchanger.capsCurrentTick * GameMain.tickPerSecI;
 
-					curDischExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+					curDischExchangersPerType[excProtoID].curPower += exchanger.currEnergyPerTick * GameMain.tickPerSecI;
 				} else if (exchanger.state >= 1f) {
 					if (!curChargingExchangersPerType.ContainsKey(excProtoID))
 						curChargingExchangersPerType.Add(excProtoID, new PowerExcData());
@@ -115,10 +115,10 @@ namespace PowerNetworkManager.Data {
 					maxNetworkPowerUsage += exchanger.energyPerTick * GameMain.tickPerSecI;
 					maxNetworkPowerUsageSansTransports += exchanger.energyPerTick * GameMain.tickPerSecI;
 
-					curChargingExchangersPerType[excProtoID].maxPower += exchanger.capacityCurrentTick * GameMain.tickPerSecI;
+					curChargingExchangersPerType[excProtoID].maxPower += exchanger.capsCurrentTick * GameMain.tickPerSecI;
 
-					curChargingExchangersPerType[excProtoID].curPower += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
-					powerDemand += exchanger.curEnergyPerTick * GameMain.tickPerSecI;
+					curChargingExchangersPerType[excProtoID].curPower += exchanger.currEnergyPerTick * GameMain.tickPerSecI;
+					powerDemand += exchanger.currEnergyPerTick * GameMain.tickPerSecI;
 				}
 			}
 

@@ -6,6 +6,10 @@ Click on any Power Node (e.g. Tesla Tower, Wireless power tower, Satellite subst
 
 ## Changelog
 
+### v0.0.5
+- Updated to use BepInEx 5.4.11
+- Fixed an issue where certain items weren't showing up in the list, and showing names that weren't quite correct
+
 ### v0.0.4
 - List items now sorted
 - Added item icons to each row of info
