@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBeltFix", "SuperBeltFi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power Network Manager", "Power Network Manager\Power Network Manager.csproj", "{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icarus Movement Fixes", "Icarus Movement Fixes\Icarus Movement Fixes.csproj", "{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A09A11F-D17A-4562-A1BA-9A3F43A6662B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

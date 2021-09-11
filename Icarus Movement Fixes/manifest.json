@@ -1,0 +1,9 @@
+{
+    "name": "Icarus_Movement_Fixes",
+    "version_number": "0.0.1",
+    "website_url": "https://github.com/testpushpleaseignore/DSP-Mods",
+    "description": "Various changes to Icarus' (the mech that you control) movement, allowing him to be a bit more nimble",
+    "dependencies": [
+        "xiaoye97-BepInEx-5.4.11"
+    ]
+}
