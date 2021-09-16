@@ -12,7 +12,7 @@ namespace IcarusMovementFixes {
 	public class IcarusMovementFixes : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.icarusmovementfixes";
 		public const string pluginName = "Icarus_Movement_Fixes";
-		public const string pluginVersion = "0.0.1";
+		public const string pluginVersion = "0.0.2";
 
 		//CONSTANTS OVERRIDES
 		private const float WALK_SLOWDOWN_MULTIPLIER = 50.0f;
@@ -62,14 +62,6 @@ namespace IcarusMovementFixes {
 				Vector3 normalized2 = Vector3.Cross(normalized, vector).normalized;
 				vector = Vector3.Cross(normalized2, normalized);
 				Vector3 vector2 = vector * __instance.controller.input0.y + normalized2 * __instance.controller.input0.x;
-				Vector3 vector3 = __instance.player.position + normalized * 0.15f;
-				float num2 = 0.35f;
-				if (Physics.CheckSphere(vector3, num2, 15873)) {
-					__instance.isGrounded = true;
-				}
-				else {
-					__instance.isGrounded = false;
-				}
 				bool flag = __instance.UpdateJump();
 				if ((__instance.controller.cmd.type == ECommand.Build && !VFInput._godModeMechaMove && !PlayerController.operationWhenBuild) || __instance.navigation.navigating) {
 					vector2 = Vector3.zero;
@@ -79,27 +71,25 @@ namespace IcarusMovementFixes {
 					vector2 = Vector3.zero;
 					flag = false;
 				}
-				float num3 = __instance.controller.softLandingRecover;
-				num3 *= num3;
-
-				float num4 = 0.2f * num3;
-
-				float num5 = __instance.player.mecha.walkSpeed;
+				float num2 = __instance.controller.softLandingRecover;
+				num2 *= num2;
+				float num3 = 0.2f * num2;
+				float num4 = __instance.player.mecha.walkSpeed;
 				if (__instance.controller.overridePlayerSpeed > 0.01f) {
-					num5 = __instance.controller.overridePlayerSpeed;
+					num4 = __instance.controller.overridePlayerSpeed;
 				}
 				OrderNode currentOrder = __instance.player.currentOrder;
 				if (currentOrder != null && !currentOrder.targetReached) {
-					Vector3 vector4 = currentOrder.target - __instance.player.position;
-					vector4 = Vector3.Cross(Vector3.Cross(normalized, vector4).normalized, normalized).normalized;
-					__instance.rtsVelocity = Vector3.Slerp(__instance.rtsVelocity, vector4 * num5, num4);
+					Vector3 vector3 = currentOrder.target - __instance.player.position;
+					vector3 = Vector3.Cross(Vector3.Cross(normalized, vector3).normalized, normalized).normalized;
+					__instance.rtsVelocity = Vector3.Slerp(__instance.rtsVelocity, vector3 * num4, num3);
 				}
 				else {
-					__instance.rtsVelocity = Vector3.MoveTowards(__instance.rtsVelocity, Vector3.zero, num * 6f * num5);
+					__instance.rtsVelocity = Vector3.MoveTowards(__instance.rtsVelocity, Vector3.zero, num * 6f * num4);
 				}
 				if (__instance.navigation.navigating) {
 					bool flag2 = false;
-					__instance.navigation.DetermineLowVelocity(num5, num4, ref __instance.moveVelocity, ref flag2);
+					__instance.navigation.DetermineLowVelocity(num4, num3, ref __instance.moveVelocity, ref flag2);
 					if (flag2) {
 						__instance.SwitchToFly();
 					}
@@ -107,38 +97,48 @@ namespace IcarusMovementFixes {
 				else {
 					// Walk Slowdown changes made here
 					if (__instance.isGrounded)
-						num4 *= WALK_SLOWDOWN_MULTIPLIER;
-					__instance.moveVelocity = Vector3.Slerp(__instance.moveVelocity, vector2 * num5, num4);
+						num3 *= WALK_SLOWDOWN_MULTIPLIER;
+					__instance.moveVelocity = Vector3.Slerp(__instance.moveVelocity, vector2 * num4, num3);
 				}
-				Vector3 vector5 = __instance.moveVelocity + __instance.rtsVelocity;
-				if ((double)num3 > 0.9) {
-					vector5 = Vector3.ClampMagnitude(vector5, num5);
+				Vector3 vector4 = __instance.moveVelocity + __instance.rtsVelocity;
+				if ((double)num2 > 0.9) {
+					vector4 = Vector3.ClampMagnitude(vector4, num4);
 				}
-				__instance.UseWalkEnergy(ref vector5, __instance.mecha.walkPower * (double)num * (double)__instance.controller.softLandingRecover);
-				Vector3 b = Vector3.Dot(vector5, normalized) * normalized;
-				vector5 -= b;
-				float num6 = __instance.controller.vertSpeed;
-				float num7 = 0.6f;
-				float num8 = 1f;
-				num7 = Mathf.Lerp(1f, num7, Mathf.Clamp01(__instance.jumpedTime * 1f));
-				if (num6 > 0f) {
-					num6 *= num7;
+				__instance.UseWalkEnergy(ref vector4, __instance.mecha.walkPower * (double)num * (double)__instance.controller.softLandingRecover);
+				Vector3 b = Vector3.Dot(vector4, normalized) * normalized;
+				vector4 -= b;
+				float num5 = __instance.controller.vertSpeed;
+				float num6 = 0.8f;
+				float num7 = 1f;
+				num6 = Mathf.Lerp(1f, num6, Mathf.Clamp01(__instance.jumpedTime * 1f));
+				if (num5 > 0f) {
+					num5 *= num6;
+				} else if (num5 < 0f) {
+					num5 *= num7;
 				}
-				else if (num6 < 0f) {
-					num6 *= num8;
+				if (flag) {
+					__instance.jumpDelayTick = __instance.jumpDelay;
+					__instance.jumpStartVertSpeed = __instance.mecha.jumpSpeed;
+					__instance.jumpingVertSpeed = 0f;
 				}
-				if (flag && __instance.UseJumpEnergy()) {
-					num6 += __instance.mecha.jumpSpeed;
+				if (__instance.jumpDelayTick > 0) {
+					__instance.isGrounded = false;
+					__instance.jumpDelayTick--;
+					__instance.jumpStartVertSpeed = __instance.mecha.jumpSpeed;
+					__instance.jumpingVertSpeed = 0f;
+					if (__instance.jumpDelayTick == 0 && __instance.UseJumpEnergy()) {
+						num5 += __instance.mecha.jumpSpeed;
+						__instance.jumpingVertSpeed = (__instance.jumpStartVertSpeed = num5);
+					}
 				}
-				if (__instance.isGrounded && vector5.sqrMagnitude < 0.005f && __instance.controller.input0.sqrMagnitude == 0f) {
+				if (__instance.isGrounded && vector4.sqrMagnitude < 0.005f && __instance.controller.input0.sqrMagnitude == 0f) {
 					__instance.controller.SleepRigidBody();
 				}
-				__instance.controller.velocity = num6 * normalized + vector5;
+				__instance.controller.velocity = num5 * normalized + vector4;
 				if (vector2.sqrMagnitude > 0.25f) {
-					__instance.controller.turning = Vector3.SignedAngle(vector5, vector2, normalized);
-				}
-				else {
-					__instance.controller.turning = 0f;
+					__instance.controller.turning_raw = Vector3.SignedAngle(vector4, vector2, normalized);
+				} else {
+					__instance.controller.turning_raw = 0f;
 				}
 				__instance.controller.actionDrift.rtsVelocity = __instance.rtsVelocity;
 				__instance.controller.actionDrift.moveVelocity = __instance.moveVelocity;
@@ -224,10 +224,10 @@ namespace IcarusMovementFixes {
 				}
 				__instance.controller.velocity = num8 * normalized + vector4;
 				if (vector2.sqrMagnitude > 0.25f) {
-					__instance.controller.turning = Vector3.SignedAngle(vector4, vector2, normalized);
+					__instance.controller.turning_raw = Vector3.SignedAngle(vector4, vector2, normalized);
 				}
 				else {
-					__instance.controller.turning = 0f;
+					__instance.controller.turning_raw = 0f;
 				}
 				if (__instance.mecha.coreEnergy < 10000.0) {
 					__instance.controller.movementStateInFrame = EMovementState.Walk;

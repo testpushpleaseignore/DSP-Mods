@@ -7,6 +7,9 @@ The goal for this mod is to make certain aspects of Icarus (the mech that you co
   * Useful for when coming in really fast while Sailing
 ## Changelog
 
+### v0.0.2
+* Updated to work with DSP version 0.8.21.8562
+
 ### v0.0.1
 * Initial Release
 * Increased how quickly Icarus slows down when on the ground or hovering over the water.
