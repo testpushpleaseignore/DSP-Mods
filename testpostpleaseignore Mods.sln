@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Power Network Manager", "Po
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icarus Movement Fixes", "Icarus Movement Fixes\Icarus Movement Fixes.csproj", "{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiggerReformSizeReupload", "BiggerReformSizeReupload\BiggerReformSizeReupload.csproj", "{71EC9071-FD62-4C1D-AF49-F20DAF8CC666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upgrade Amount", "Upgrade Amount\Upgrade Amount.csproj", "{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBA38453-BEB3-4E32-AE4B-5AA7A20A199A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71EC9071-FD62-4C1D-AF49-F20DAF8CC666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71EC9071-FD62-4C1D-AF49-F20DAF8CC666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71EC9071-FD62-4C1D-AF49-F20DAF8CC666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71EC9071-FD62-4C1D-AF49-F20DAF8CC666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

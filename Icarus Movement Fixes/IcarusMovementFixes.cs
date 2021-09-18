@@ -46,7 +46,7 @@ namespace IcarusMovementFixes {
 		}
 
 		void Update() {
-
+			
 		}
 
 		void OnGUI() {

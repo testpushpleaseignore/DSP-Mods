@@ -1,0 +1,9 @@
+{
+    "name": "Bigger_Reform_Size_Reupload",
+    "version_number": "0.0.1",
+    "website_url": "https://github.com/testpushpleaseignore/DSP-Mods",
+    "description": "Reupload of xiaoye97's BiggerReformSize mod, since their mod has become out-of-date",
+    "dependencies": [
+        "xiaoye97-BepInEx-5.4.11"
+    ]
+}
