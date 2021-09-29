@@ -72,12 +72,5 @@ namespace UpgradeAmount {
 			harmony.UnpatchSelf();
 			instance = null;
 		}
-
-		void Update() {
-
-		}
-
-		void OnGUI() {
-		}
 	}
 }

@@ -98,6 +98,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "C:\Users\elnin\AppData\Roaming\r2modmanPlus-local\DysonSphereProgram\profiles\Default\BepInEx\scripts\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "C:\Users\elnin\AppData\Roaming\Thunderstore Mod Manager\DataFolder\DysonSphereProgram\profiles\Default\BepInEx\scripts\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
