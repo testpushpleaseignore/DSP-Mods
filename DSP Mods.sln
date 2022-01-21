@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiggerReformSizeReupload", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upgrade Amount", "Upgrade Amount\Upgrade Amount.csproj", "{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test Fixes", "Test Fixes\Test Fixes.csproj", "{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

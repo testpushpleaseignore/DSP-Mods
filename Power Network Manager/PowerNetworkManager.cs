@@ -15,7 +15,7 @@ namespace PowerNetworkManager {
 	public class PowerNetworkManager : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.powernetworkmanager";
 		public const string pluginName = "Power_Network_Manager";
-		public const string pluginVersion = "0.0.5";
+		public const string pluginVersion = "0.0.6";
 
 		private Harmony harmony;
 
