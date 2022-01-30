@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31105.61
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBeltFix", "SuperBeltFix\SuperBeltFix.csproj", "{79372AC0-6DBE-48A5-B7BB-1A625725A9F1}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upgrade Amount", "Upgrade Amount\Upgrade Amount.csproj", "{C2C3F6F9-58F5-45B9-87DB-0144C94F1ADD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test Fixes", "Test Fixes\Test Fixes.csproj", "{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetVeinUtilization", "PlanetVeinUtilization\PlanetVeinUtilization.csproj", "{6330BFE4-CFEF-4BD1-B5B7-BA4CE182BAB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0EFA9E2-265C-4B5F-9D15-0958C26DCC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6330BFE4-CFEF-4BD1-B5B7-BA4CE182BAB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6330BFE4-CFEF-4BD1-B5B7-BA4CE182BAB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6330BFE4-CFEF-4BD1-B5B7-BA4CE182BAB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6330BFE4-CFEF-4BD1-B5B7-BA4CE182BAB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
