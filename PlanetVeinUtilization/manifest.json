@@ -1,6 +1,6 @@
 {
     "name": "Planet_Vein_Utilization",
-    "version_number": "1.0.1",
+    "version_number": "1.0.2",
     "website_url": "https://github.com/testpushpleaseignore/DSP-Mods",
     "description": "Adds the number of veins with miners attached for each resource on a planet. Great for determining if there are any veins not being mined currently.",
     "dependencies": [

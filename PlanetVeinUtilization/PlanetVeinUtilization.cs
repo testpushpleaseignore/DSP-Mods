@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using HarmonyLib;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace PlanetVeinUtilization {
 	public class PlanetVeinUtilization : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.planet_vein_utilization";
 		public const string pluginName = "Planet Vein Utilization";
-		public const string pluginVersion = "1.0.1";
+		public const string pluginVersion = "1.0.2";
 
 		public class VeinTypeInfo {
 			public EVeinType type;
@@ -26,19 +27,27 @@ namespace PlanetVeinUtilization {
 		private static Dictionary<EVeinType, VeinTypeInfo> veinCount = new Dictionary<EVeinType, VeinTypeInfo>();
 
 		Harmony harmony;
+		internal static ManualLogSource logger;
 
 		void Awake() {
 			harmony = new Harmony(pluginGuid);
 			harmony.PatchAll(typeof(PlanetVeinUtilization));
+
+			logger = base.Logger;
 		}
 
 		[HarmonyPostfix, HarmonyPatch(typeof(UIPlanetDetail), "RefreshDynamicProperties")]
 		public static void UIPlanetDetail_RefreshDynamicProperties_Postfix(UIPlanetDetail __instance) {
-			if (__instance.planet != null && __instance.planet.veinGroups != null) {
+			if (__instance.planet != null && __instance.planet.factory != null && __instance.planet.veinGroups != null) {
 				if (currentPlanet != __instance.planet) {
 					currentPlanet = __instance.planet;
 					veinCount.Clear();
 				}
+
+#if (DEBUG)
+				logger.LogDebug(string.Format("Planet # of vein groups: {0}", __instance.planet.veinGroups.Length));
+				logger.LogDebug(string.Format("Planet factory is null: {0}", __instance.planet.factory == null));
+#endif
 
 				//find out which vein groups have miners attached to them
 				bool[] veinGroupContainsMiner = new bool[__instance.planet.veinGroups.Length];

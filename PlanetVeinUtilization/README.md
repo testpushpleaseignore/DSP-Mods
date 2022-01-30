@@ -5,6 +5,9 @@ For example, it could show a planet having 15 total iron veins, while only havin
 
 ## Changelog
 
+### v1.0.2
+* Fix for an exception when clicking on a planet that you haven't landed on yet
+
 ### v1.0.1
 * uploaded wrong readme
 
