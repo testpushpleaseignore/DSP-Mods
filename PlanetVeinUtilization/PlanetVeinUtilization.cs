@@ -2,14 +2,14 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace PlanetVeinUtilization {
 	[BepInPlugin(pluginGuid, pluginName, pluginVersion)]
 	public class PlanetVeinUtilization : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.planet_vein_utilization";
 		public const string pluginName = "Planet Vein Utilization";
-		public const string pluginVersion = "1.0.2";
+		public const string pluginVersion = "1.0.3";
 
 		public class VeinTypeInfo {
 			public EVeinType type;
@@ -38,17 +38,14 @@ namespace PlanetVeinUtilization {
 
 		[HarmonyPostfix, HarmonyPatch(typeof(UIPlanetDetail), "RefreshDynamicProperties")]
 		public static void UIPlanetDetail_RefreshDynamicProperties_Postfix(UIPlanetDetail __instance) {
+			
+
 			if (__instance.planet != null && __instance.planet.factory != null && __instance.planet.veinGroups != null) {
 				if (currentPlanet != __instance.planet) {
 					currentPlanet = __instance.planet;
 					veinCount.Clear();
 				}
-
-#if (DEBUG)
-				logger.LogDebug(string.Format("Planet # of vein groups: {0}", __instance.planet.veinGroups.Length));
-				logger.LogDebug(string.Format("Planet factory is null: {0}", __instance.planet.factory == null));
-#endif
-
+				
 				//find out which vein groups have miners attached to them
 				bool[] veinGroupContainsMiner = new bool[__instance.planet.veinGroups.Length];
 				foreach (VeinData veinData in __instance.planet.factory.veinPool) {
@@ -85,7 +82,11 @@ namespace PlanetVeinUtilization {
 				//update each resource to show the following vein group info:
 				//     Iron:  <number of vein groups with miners> / <total number of vein groups>
 				int num = (__instance.planet == GameMain.localPlanet) ? 1 : 2;
+				TextGenerator textGen = new TextGenerator();
+				float maxResTextboxWidth = 0.0f;
 				foreach (UIResAmountEntry uiresAmountEntry in __instance.entries) {
+					string labelString;
+
 					if (uiresAmountEntry.refId > 0 && GameMain.history.universeObserveLevel >= num && veinCount.ContainsKey((EVeinType) uiresAmountEntry.refId)) {
 						VeinTypeInfo vt = veinCount[(EVeinType) uiresAmountEntry.refId];
 
@@ -93,9 +94,22 @@ namespace PlanetVeinUtilization {
 							vt.origLabel = uiresAmountEntry.labelText.text;
 						}
 
-						uiresAmountEntry.overrideLabel = vt.origLabel + ":  " + vt.numVeinGroupsWithCollector + "/" + vt.numVeinGroups;
-					}
+						labelString = vt.origLabel + ":  " + vt.numVeinGroupsWithCollector + "/" + vt.numVeinGroups;
+						uiresAmountEntry.overrideLabel = labelString;
+					} else
+						labelString = uiresAmountEntry.labelText.text;
+
+					TextGenerationSettings generationSettings = uiresAmountEntry.labelText.GetGenerationSettings(uiresAmountEntry.labelText.rectTransform.rect.size);
+					float width = textGen.GetPreferredWidth(labelString, generationSettings);
+					if (width > maxResTextboxWidth)
+						maxResTextboxWidth = width;
 				}
+
+				//resize window to fit all of the new text we've added
+				//
+				//hardcoding a value of 150 for now, since I'm too lazy right now to figure out
+				//how much space the icon and the text of the right of the icon is currently taking up
+				__instance.rectTrans.sizeDelta = new Vector2(maxResTextboxWidth + 150, __instance.rectTrans.sizeDelta.y);
 			}
 		}
 
