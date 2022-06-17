@@ -38,16 +38,16 @@ namespace PlanetVeinUtilization {
 
 		[HarmonyPostfix, HarmonyPatch(typeof(UIPlanetDetail), "RefreshDynamicProperties")]
 		public static void UIPlanetDetail_RefreshDynamicProperties_Postfix(UIPlanetDetail __instance) {
-			
 
-			if (__instance.planet != null && __instance.planet.factory != null && __instance.planet.veinGroups != null) {
+
+			if (__instance.planet != null && __instance.planet.factory != null && __instance.planet.runtimeVeinGroups != null) {
 				if (currentPlanet != __instance.planet) {
 					currentPlanet = __instance.planet;
 					veinCount.Clear();
 				}
-				
+
 				//find out which vein groups have miners attached to them
-				bool[] veinGroupContainsMiner = new bool[__instance.planet.veinGroups.Length];
+				bool[] veinGroupContainsMiner = new bool[__instance.planet.runtimeVeinGroups.Length];
 				foreach (VeinData veinData in __instance.planet.factory.veinPool) {
 					if (veinData.amount > 0 && veinData.minerCount > 0) {
 						veinGroupContainsMiner[veinData.groupIndex] = true;
@@ -59,8 +59,8 @@ namespace PlanetVeinUtilization {
 				}
 
 				//count up the total number of vein groups per resource type, as well as the total number of groups that have a miner attached
-				for (int i = 0; i < __instance.planet.veinGroups.Length; i++) {
-					PlanetData.VeinGroup veinGroup = __instance.planet.veinGroups[i];
+				for (int i = 0; i < __instance.planet.runtimeVeinGroups.Length; i++) {
+					VeinGroup veinGroup = __instance.planet.runtimeVeinGroups[i];
 
 					if (veinGroup.amount == 0)
 						continue;
@@ -100,9 +100,12 @@ namespace PlanetVeinUtilization {
 						labelString = uiresAmountEntry.labelText.text;
 
 					TextGenerationSettings generationSettings = uiresAmountEntry.labelText.GetGenerationSettings(uiresAmountEntry.labelText.rectTransform.rect.size);
-					float width = textGen.GetPreferredWidth(labelString, generationSettings);
-					if (width > maxResTextboxWidth)
-						maxResTextboxWidth = width;
+					float labelWidth = textGen.GetPreferredWidth(labelString, generationSettings);
+
+
+
+					if (labelWidth > maxResTextboxWidth)
+						maxResTextboxWidth = labelWidth;
 				}
 
 				//resize window to fit all of the new text we've added
