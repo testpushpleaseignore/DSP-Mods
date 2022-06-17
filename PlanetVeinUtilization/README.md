@@ -5,6 +5,9 @@ For example, it could show a planet having 15 total iron veins, while only havin
 
 ## Changelog
 
+### v1.0.4
+* updated to work for DSP v0.9.26.13026
+
 ### v1.0.3
 * made the planet resource window auto-adjut its width now, since the "x/y" text that I'm adding may cause it to overrun into the icon to the right
 

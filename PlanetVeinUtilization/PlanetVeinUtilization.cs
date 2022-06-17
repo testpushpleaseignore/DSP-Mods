@@ -9,7 +9,7 @@ namespace PlanetVeinUtilization {
 	public class PlanetVeinUtilization : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.planet_vein_utilization";
 		public const string pluginName = "Planet Vein Utilization";
-		public const string pluginVersion = "1.0.3";
+		public const string pluginVersion = "1.0.4";
 
 		public class VeinTypeInfo {
 			public EVeinType type;
