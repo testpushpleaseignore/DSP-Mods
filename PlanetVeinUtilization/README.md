@@ -5,6 +5,15 @@ For example, it could show a planet having 15 total iron veins, while only havin
 
 ## Changelog
 
+### v1.0.5
+Below updates are thanks to @soarqin!
+* right-align vein groups text
+* can view count on detail panel for stars
+* can view count on planets/stars w/o factories (due to new mechanism since v0.9.26)
+* support panel filters in v0.9.27.15033
+* simplify panel width calculation
+* performance optimization
+
 ### v1.0.4
 * updated to work for DSP v0.9.26.13026
 

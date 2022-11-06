@@ -10,7 +10,7 @@ namespace PlanetVeinUtilization {
 	public class PlanetVeinUtilization : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.planet_vein_utilization";
 		public const string pluginName = "Planet Vein Utilization";
-		public const string pluginVersion = "1.0.4";
+		public const string pluginVersion = "1.0.5";
 
 		public class VeinTypeInfo {
 			public int numVeinGroups;
@@ -73,7 +73,7 @@ namespace PlanetVeinUtilization {
 			PlanetFactory factory = planet.factory;
 			if (factory != null) {
 				VeinData[] veinPool = factory.veinPool;
-				lock(veinPool) {
+				lock (veinPool) {
 					foreach (VeinData veinData in veinPool) {
 						if (veinData.groupIndex == 0 || veinData.amount == 0) continue;
 						if (veinData.amount == 0) continue;
@@ -82,12 +82,12 @@ namespace PlanetVeinUtilization {
 							hasMiner = veinData.minerCount > 0;
 							if (!hasMiner) continue;
 							tmpGroups[veinData.groupIndex] = true;
-							VeinTypeInfo vti = planetVeinCount[(int)veinData.type];
+							VeinTypeInfo vti = planetVeinCount[(int) veinData.type];
 							vti.numVeinGroupsWithCollector++;
 						} else {
 							hasMiner = veinData.minerCount > 0;
 							tmpGroups.Add(veinData.groupIndex, hasMiner);
-							VeinTypeInfo vti = planetVeinCount[(int)veinData.type];
+							VeinTypeInfo vti = planetVeinCount[(int) veinData.type];
 							vti.numVeinGroups++;
 							if (hasMiner) {
 								vti.numVeinGroupsWithCollector++;
@@ -100,7 +100,7 @@ namespace PlanetVeinUtilization {
 				VeinGroup[] veinGroups = planet.runtimeVeinGroups;
 				lock (planet.veinGroupsLock) {
 					for (int i = 1; i < veinGroups.Length; i++) {
-						planetVeinCount[(int)veinGroups[i].type].numVeinGroups++;
+						planetVeinCount[(int) veinGroups[i].type].numVeinGroups++;
 					}
 				}
 			}
@@ -110,7 +110,7 @@ namespace PlanetVeinUtilization {
 			foreach (UIResAmountEntry uiresAmountEntry in __instance.entries) {
 				int refId = uiresAmountEntry.refId;
 				VeinTypeInfo vt;
-				if (refId > 0 && refId < (int)EVeinType.Max && (vt = planetVeinCount[refId]).numVeinGroups > 0) {
+				if (refId > 0 && refId < (int) EVeinType.Max && (vt = planetVeinCount[refId]).numVeinGroups > 0) {
 					if (vt.textCtrl == null) {
 						vt.textCtrl = Object.Instantiate(uiresAmountEntry.valueText, uiresAmountEntry.labelText.transform.parent);
 						vt.textCtrl.font = uiresAmountEntry.labelText.font;
@@ -153,7 +153,7 @@ namespace PlanetVeinUtilization {
 				PlanetFactory factory = planet.factory;
 				if (factory != null) {
 					VeinData[] veinPool = factory.veinPool;
-					lock(veinPool) {
+					lock (veinPool) {
 						foreach (VeinData veinData in veinPool) {
 							if (veinData.groupIndex == 0 || veinData.amount == 0) continue;
 							if (tmpGroups.TryGetValue(veinData.groupIndex, out bool hasMiner)) {
@@ -161,12 +161,12 @@ namespace PlanetVeinUtilization {
 								hasMiner = veinData.minerCount > 0;
 								if (!hasMiner) continue;
 								tmpGroups[veinData.groupIndex] = true;
-								VeinTypeInfo vti = starVeinCount[(int)veinData.type];
+								VeinTypeInfo vti = starVeinCount[(int) veinData.type];
 								vti.numVeinGroupsWithCollector++;
 							} else {
 								hasMiner = veinData.minerCount > 0;
 								tmpGroups.Add(veinData.groupIndex, hasMiner);
-								VeinTypeInfo vti = starVeinCount[(int)veinData.type];
+								VeinTypeInfo vti = starVeinCount[(int) veinData.type];
 								vti.numVeinGroups++;
 								if (hasMiner) {
 									vti.numVeinGroupsWithCollector++;
@@ -179,7 +179,7 @@ namespace PlanetVeinUtilization {
 					VeinGroup[] veinGroups = planet.runtimeVeinGroups;
 					lock (planet.veinGroupsLock) {
 						for (int i = 1; i < veinGroups.Length; i++) {
-							starVeinCount[(int)veinGroups[i].type].numVeinGroups++;
+							starVeinCount[(int) veinGroups[i].type].numVeinGroups++;
 						}
 					}
 				}
@@ -189,7 +189,7 @@ namespace PlanetVeinUtilization {
 				foreach (UIResAmountEntry uiresAmountEntry in __instance.entries) {
 					int refId = uiresAmountEntry.refId;
 					VeinTypeInfo vt;
-					if (refId > 0 && refId < (int)EVeinType.Max && (vt = starVeinCount[refId]).numVeinGroups > 0) {
+					if (refId > 0 && refId < (int) EVeinType.Max && (vt = starVeinCount[refId]).numVeinGroups > 0) {
 						if (vt.textCtrl == null) {
 							vt.textCtrl = Object.Instantiate(uiresAmountEntry.valueText, uiresAmountEntry.labelText.transform.parent);
 							vt.textCtrl.font = uiresAmountEntry.labelText.font;
