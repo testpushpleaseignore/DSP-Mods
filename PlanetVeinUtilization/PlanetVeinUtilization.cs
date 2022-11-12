@@ -121,6 +121,11 @@ namespace PlanetVeinUtilization {
 						Vector2 size = trans.sizeDelta;
 						size.x = 40f;
 						trans.sizeDelta = size;
+					} else if (refId >= (int) EVeinType.Oil) {
+						RectTransform trans = vt.textCtrl.rectTransform;
+						Vector3 pos = trans.position;
+						pos.y = uiresAmountEntry.iconImage.rectTransform.position.y;
+						trans.position = pos;
 					}
 					vt.textCtrl.text = vt.numVeinGroupsWithCollector + "/" + vt.numVeinGroups;
 				}
@@ -200,6 +205,11 @@ namespace PlanetVeinUtilization {
 							Vector2 size = trans.sizeDelta;
 							size.x = 40f;
 							trans.sizeDelta = size;
+						} else if (refId >= (int) EVeinType.Oil) {
+							RectTransform trans = vt.textCtrl.rectTransform;
+							Vector3 pos = trans.position;
+							pos.y = uiresAmountEntry.iconImage.rectTransform.position.y;
+							trans.position = pos;
 						}
 						vt.textCtrl.text = vt.numVeinGroupsWithCollector + "/" + vt.numVeinGroups;
 					}
