@@ -5,6 +5,10 @@ For example, it could show a planet having 15 total iron veins, while only havin
 
 ## Changelog
 
+### v1.0.6
+Below updates are thanks to @soarqin!
+* fix display position of rare resources
+
 ### v1.0.5
 Below updates are thanks to @soarqin!
 * right-align vein groups text
