@@ -185,7 +185,7 @@ namespace PowerNetworkManager.Data {
 					curConsPerType.Add(consProtoID, new PowerConsData());
 				curConsPerType[consProtoID].idlePower += consumer.idleEnergyPerTick * GameMain.tickPerSecI;
 				curConsPerType[consProtoID].maxPower += consumer.workEnergyPerTick * GameMain.tickPerSecI;
-				curConsPerType[consProtoID].currPower += consumer.requiredEnergy * GameMain.tickPerSecI;
+				curConsPerType[consProtoID].currPower += (long) Math.Floor(Convert.ToDouble(consumer.requiredEnergy * GameMain.tickPerSecI) * consumerRatio);
 			}
 
 			foreach (Node node in powerNetwork.nodes) {
@@ -198,7 +198,7 @@ namespace PowerNetworkManager.Data {
 						curConsPerType.Add(nodeProtoID, new PowerConsData());
 					curConsPerType[nodeProtoID].idlePower += nodeC.idleEnergyPerTick * GameMain.tickPerSecI;
 					curConsPerType[nodeProtoID].maxPower += nodeC.workEnergyPerTick * GameMain.tickPerSecI;
-					curConsPerType[nodeProtoID].currPower += nodeC.requiredEnergy * GameMain.tickPerSecI;
+					curConsPerType[nodeProtoID].currPower += (long)Math.Floor(Convert.ToDouble(nodeC.requiredEnergy * GameMain.tickPerSecI) * consumerRatio);
 				}
 			}
 
