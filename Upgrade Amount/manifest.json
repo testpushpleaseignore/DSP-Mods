@@ -1,9 +1,9 @@
 {
     "name": "Upgrade_Amount",
-    "version_number": "0.0.1",
+    "version_number": "0.0.2",
     "website_url": "https://github.com/testpushpleaseignore/DSP-Mods",
     "description": "Updates the cursor to include the amount of items being upgraded when doing a chain upgrade",
     "dependencies": [
-        "xiaoye97-BepInEx-5.4.11"
+        "xiaoye97-BepInEx-5.4.17"
     ]
 }
