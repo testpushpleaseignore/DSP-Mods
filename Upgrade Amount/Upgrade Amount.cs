@@ -2,17 +2,17 @@
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using UnityEngine;
 using System;
 
-namespace UpgradeAmount {
+namespace UpgradeAmount
+{
 
 	[BepInPlugin(pluginGuid, pluginName, pluginVersion)]
 	[BepInProcess("DSPGame.exe")]
 	public class UpgradeAmount : BaseUnityPlugin {
 		public const string pluginGuid = "testpostpleaseignore.dsp.upgradeamount";
 		public const string pluginName = "Upgrade_Amount";
-		public const string pluginVersion = "0.0.1";
+		public const string pluginVersion = "0.0.2";
 
 		private Harmony harmony;
 
@@ -59,7 +59,7 @@ namespace UpgradeAmount {
 							}
 							else {
 								if (__instance.chainReaction) {
-									__instance.actionBuild.model.cursorText = "升级".Translate() + buildPreview.item.name + "\r\n" + $"{__instance.buildPreviews.Count} Selected";
+									__instance.actionBuild.model.cursorText = $"{"升级".Translate()}{buildPreview.item.name}\r\n{__instance.buildPreviews.Count} Selected";
 								}
 							}
 						}

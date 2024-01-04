@@ -38,19 +38,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\Libraries\0Harmony.dll</HintPath>
+      <HintPath>..\Libraries\BepInEx\5.4.17\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\Libraries\BepInEx.dll</HintPath>
+      <HintPath>..\Libraries\BepInEx\5.4.17\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>..\Libraries\BepInEx.Harmony.dll</HintPath>
+      <HintPath>..\Libraries\BepInEx\5.4.17\BepInEx.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="LDBTool">
-      <HintPath>..\Libraries\LDBTool.dll</HintPath>
+      <HintPath>..\Libraries\LDBTool\3.0.1\LDBTool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -92,6 +92,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "C:\Users\elnin\AppData\Roaming\Thunderstore Mod Manager\DataFolder\DysonSphereProgram\profiles\Default\BepInEx\scripts\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "C:\Users\elnin\AppData\Roaming\r2modmanPlus-local\DysonSphereProgram\profiles\Default\BepInEx\scripts\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
